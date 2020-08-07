@@ -7,49 +7,16 @@ using System.Text;
 
 namespace NSL_KDD
 {
-    /// <summary>
-    /// Класс, содержащий основную информацию из матрицы ошибок (confusion matrix)
-    /// 
-    /// TP - True Positive
-    /// FP - False Positive
-    /// TN - True Negative
-    /// FN - False Negative
-    /// </summary>
     public class ClassificationReport
     {
-        /// <summary>
-        /// Точность. Рассчитывается, как TP/(TP+FP)
-        /// </summary>
         public double[] Precision { get; }
-
-        /// <summary>
-        /// Полнота.  Рассчитывается, как TP/(TP+FN)
-        /// </summary>
         public double[] Recall { get; }
-
-        /// <summary>
-        /// Ф-Мера.  Рассчитывается, как 2*Recall*Precision/(Recall+Precision)
-        /// </summary>
         public double[] FScore { get; }
-
-        /// <summary>
-        /// Количество верно определенных классов. TP
-        /// </summary>
         public int[] Support { get; }
-
-        /// <summary>
-        /// Аккуратность. (TP+TN)/Total
-        /// </summary>
         public double Accuracy { get; }
 
-        /// <summary>
-        /// Количество классов.
-        /// </summary>
         public readonly int classes;
 
-        /// <summary>
-        /// Получает данные из метрицы ошибок и создает объект класса ClassificationReport 
-        /// </summary>
         public static ClassificationReport GetReportFromConfusionMatrix(GeneralConfusionMatrix confusionMatrix)
         {
             return new ClassificationReport(
@@ -60,9 +27,6 @@ namespace NSL_KDD
                 confusionMatrix.Accuracy);
         }
 
-        /// <summary>
-        /// Конструктор класса ClassificationReport
-        /// </summary>
         private ClassificationReport(double[] precision, double[] recall, double[] fScore, int[] support, double accuracy)
         {
             Precision = precision;
@@ -74,9 +38,6 @@ namespace NSL_KDD
             classes = precision.Length;
         }
 
-        /// <summary>
-        /// Строковое представление объекта класса ClassificationReport
-        /// </summary>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

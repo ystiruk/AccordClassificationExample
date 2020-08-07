@@ -5,14 +5,8 @@ using System.Windows.Forms;
 
 namespace NSL_KDD_GUI
 {
-    /// <summary>
-    /// Вспомогательные методы
-    /// </summary>
     public static class Utilities
     {
-        /// <summary>
-        /// Преобразует результаты из ClassificationReport в вид удобный для отображения в dataGridView
-        /// </summary>
         public static DataTable ReportToDataTable(ClassificationReport report)
         {
             var result = new DataTable();
@@ -31,9 +25,6 @@ namespace NSL_KDD_GUI
             return result;
         }
 
-        /// <summary>
-        /// Метод отображения окошка предупреждения
-        /// </summary>
         public static bool ConfirmMessageBox(string text)
         {
             var result = MessageBox.Show(text, "Important",
@@ -44,9 +35,6 @@ namespace NSL_KDD_GUI
             return (result == DialogResult.OK);
         }
 
-        /// <summary>
-        /// Метод отображения окошка с информацией
-        /// </summary>
         public static bool InfoMessageBox(string text)
         {
             var result = MessageBox.Show(text, "Info",

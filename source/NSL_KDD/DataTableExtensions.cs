@@ -7,14 +7,8 @@ using System.Text;
 
 namespace NSL_KDD
 {
-    /// <summary>
-    /// Вспомогательные методы работы с таблицами данных
-    /// </summary>
     public static class DataTableExtensions
     {
-        /// <summary>
-        /// Добавляет заголовки к столбцам
-        /// </summary>
         public static void AssignHeaders(this DataTable dataTable, string[] headers, bool acceptChanges = false)
         {
             if (dataTable.Columns.Count != headers.Length)
@@ -27,9 +21,6 @@ namespace NSL_KDD
                 dataTable.AcceptChanges();
         }
 
-        /// <summary>
-        /// Получает заголовки столбцов
-        /// </summary>
         public static string[] GetHeaders(this DataTable dataTable)
         {
             List<string> headers = new List<string>();
@@ -40,9 +31,6 @@ namespace NSL_KDD
             return headers.ToArray();
         }
 
-        /// <summary>
-        /// Получает первые 'count' строк из таблицы
-        /// </summary>
         public static string Head(this DataTable dataTable, int count = 5)
         {
             StringBuilder sb = new StringBuilder();
@@ -56,9 +44,6 @@ namespace NSL_KDD
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Показывает частоты значений в столбце с заголовком columnName
-        /// </summary>
         public static string ValueCounts<T>(this DataTable dataTable, string columnName)
         {
             StringBuilder sb = new StringBuilder();
@@ -76,25 +61,16 @@ namespace NSL_KDD
             return sb.ToString();
         }
 
-        /// <summary>
-        /// Показывает количество значений в столбце с индексом columnIndex
-        /// </summary>
         public static int Shape(this DataTable dataTable, int columnIndex)
         {
             return dataTable.Columns[columnIndex].ToArray<string>().Length;
         }
 
-        /// <summary>
-        /// Показывает количество значений в столбце с заголовком columnName
-        /// </summary>
         public static int Shape(this DataTable dataTable, string columnName)
         {
             return dataTable.Columns[columnName].ToArray<string>().Length;
         }
 
-        /// <summary>
-        /// Удаляет строки из таблицы по условию 'predicate'
-        /// </summary>
         public static void RemoveRows(this DataTable dataTable, Func<DataRow, bool> predicate, bool acceptChanges = false)
         {
             dataTable.Rows.Cast<DataRow>().Where(predicate).ToList().ForEach(x => x.Delete());
@@ -103,9 +79,6 @@ namespace NSL_KDD
                 dataTable.AcceptChanges();
         }
         
-        /// <summary>
-        /// Заполняет столбец с заголовком columnName одинаковыми значениями value. Если столбец не существует, добавит его.
-        /// </summary>
         public static void SetColumn(this DataTable dataTable, string columnName, int value, bool acceptChanges = false)
         {
             if (!dataTable.Columns.Contains(columnName))
@@ -118,9 +91,6 @@ namespace NSL_KDD
                 dataTable.AcceptChanges();
         }
 
-        /// <summary>
-        /// Заполняет столбец с заголовком columnName значениями values. Если столбец не существует, добавит его.
-        /// </summary>
         public static void SetColumn(this DataTable dataTable, string columnName, double[] values, bool acceptChanges = false)
         {
             if (!dataTable.Columns.Contains(columnName))
@@ -137,9 +107,6 @@ namespace NSL_KDD
                 dataTable.AcceptChanges();
         }
 
-        /// <summary>
-        /// Удаляет столбец с заголовком columnName.
-        /// </summary>
         public static void DropColumn(this DataTable dataTable, string columnName, bool acceptChanges = false)
         {
             if (!dataTable.Columns.Contains(columnName))
@@ -151,10 +118,6 @@ namespace NSL_KDD
                 dataTable.AcceptChanges();
         }
 
-        /// <summary>
-        /// Производит замену столбца категориальных признаков на несколько столбцов с численными признаками.
-        /// (one-hot encoding)
-        /// </summary>
         public static DataTable OneHot(this DataTable dataTable, Type[] columnTypes, bool dropFirst = false)
         {
             DataTable result = new DataTable();
@@ -190,9 +153,6 @@ namespace NSL_KDD
             return result;
         }
         
-        /// <summary>
-        /// Меняет типы данных столбцов в таблице на соответствующие типы 'columnTypes'
-        /// </summary>
         public static DataTable ChangeTypes(this DataTable dataTable, Type[] columnTypes)
         {
             if (columnTypes.Length < dataTable.Columns.Count)
@@ -219,9 +179,6 @@ namespace NSL_KDD
             return result;
         }
 
-        /// <summary>
-        /// Меняет типы данных столбцов в таблице на тип 'columnType'
-        /// </summary>
         public static DataTable ChangeTypes(this DataTable dataTable, Type columnType)
         {
             Type[] types = Enumerable.Repeat(typeof(double), dataTable.Columns.Count).ToArray<Type>();

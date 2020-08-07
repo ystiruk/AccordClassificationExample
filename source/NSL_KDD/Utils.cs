@@ -8,14 +8,8 @@ using System.Linq;
 
 namespace NSL_KDD
 {
-    /// <summary>
-    /// Содержит вспомогательные методы для преобразования данных
-    /// </summary>
     public static class Utils
     {
-        /// <summary>
-        /// Пытается вывести более подходящий тип данных из строкового представления объекта
-        /// </summary>
         public static void InferentTypes<T>(IEnumerable<T> values, out Type[] types)
         {
             var array = values.ToArray<T>();
@@ -35,9 +29,6 @@ namespace NSL_KDD
             }
         }
 
-        /// <summary>
-        /// Соединяет строки двух или более таблиц и помещает их в одну таблицу
-        /// </summary>
         public static DataTable ConcatDataTables(params DataTable[] tables)
         {
             DataTable result = new DataTable();
@@ -47,10 +38,6 @@ namespace NSL_KDD
             return result;
         }
 
-        /// <summary>
-        /// Разделяет данные из матриц X и Y в случайном порядке на тестовые и обучающие матрицы
-        /// в процентном соотношении percent
-        /// </summary>
         public static void SplitTrainTest(double[][] X, int[] Y, out double[][] x_train, out double[][] x_test, out int[] y_train, out int[] y_test, int percent = 75, int seed = 17)
         {
             if (X.GetLength(0) != Y.GetLength(0))
@@ -81,10 +68,6 @@ namespace NSL_KDD
             }
         }
 
-        /// <summary>
-        /// Основной метод подготовки данных. Считывает данные из файлов, обрабатывает и сохраняет промежуточные
-        /// результаты в кеш. Если данные уже есть в кеше, загружает их. Если выставлен флаг forcePrepare, данные принудительно пересчитываются.
-        /// </summary>
         public static void PrepareData(out double[][] x_train, out double[][] x_test, out int[] y_train, out int[] y_test, out string[] y_labels, bool forcePrepare = false)
         {
             if (!forcePrepare && Cache.IsCacheExists)
